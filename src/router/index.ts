@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
+import Novo from '../views/Novo.vue';
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
+  { path: '/', name: 'Home', component: Home },
+  { path: '/novo', name: 'Novo', component: Novo },
+
   {
     path: '/about',
     name: 'About',
