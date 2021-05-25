@@ -13,12 +13,16 @@
 </template>
 
 <script lang="ts">
+import useAuth from '@/modules/auth';
 import {
  defineComponent, reactive, Ref, ref, toRefs,
 } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
+    const auth = useAuth();
+    const router = useRouter();
     const user: Ref<HTMLElement | null> = ref(null);
     const pass: Ref<HTMLElement | null> = ref(null);
     const state = reactive({
@@ -27,7 +31,11 @@ export default defineComponent({
     });
 
     const login = () => {
-      console.log('Login', state.username, state.password);
+      const res = auth.actions.login(state.username, state.password);
+
+      if (res) {
+        router.push({ name: 'Home' });
+      }
     };
 
     const userHandler = (e: KeyboardEvent) => {
