@@ -1,55 +1,31 @@
 <template>
   <div class="card">
-    <div>
-      {{ a }}
-      <button @click="clickHandler">++</button>
-    </div>
-
-    <div>
-      <button @click="clickGlobalHandler">++global</button>
-    </div>
-
     <div class="card-title">
       {{ title }}
     </div>
     <div>
       {{ body }}
+
+      <types :types="types" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {
- defineComponent, reactive, toRefs,
-} from 'vue';
+import { defineComponent } from 'vue';
+import Types from './Types.vue';
 
 export default defineComponent({
+  components: { Types },
   props: {
     title: { type: String, default: '' },
     body: { type: String, default: '' },
+    types: { type: Array, required: true },
   },
 
   // Composition API
-  setup(props, { emit }) {
-    const state = reactive({
-      a: 0,
-      b: 0,
-      c: 0,
-    });
-
-    const clickHandler = () => {
-      state.a++;
-    };
-
-    const clickGlobalHandler = () => {
-      emit('plus-plus', 1);
-    };
-
-    return {
-      ...toRefs(state),
-      clickHandler,
-      clickGlobalHandler,
-    };
+  setup() {
+    return {};
   },
 });
 </script>

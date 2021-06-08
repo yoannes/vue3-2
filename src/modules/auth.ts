@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { reactive, readonly } from 'vue';
 
 interface AuthState {
@@ -23,10 +23,10 @@ interface UseAuth {
 }
 
 const state: AuthState = reactive({
-  id: '',
-  username: '',
+  id: '1',
+  username: 'yo',
   password: '',
-  token: '',
+  token: 'token',
 });
 
 const mutations = {
