@@ -11,19 +11,30 @@ export interface PokemonType {
   type: {
     name: string;
     url: string;
-  }
+  };
+}
+
+export interface PokemonStat {
+  baseStat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
 }
 
 export interface Pokemon {
   id: number;
   name: string;
-  types: PokemonType[]
+  types: PokemonType[];
   height: number;
   weight: number;
   sprites: {
     backDefault: string;
     frontDefault: string;
-  }
+  };
+  price: number;
+  stats: PokemonStat[];
 }
 
 export interface CardState {
@@ -90,6 +101,15 @@ const actions = {
         backDefault: res.data.sprites.back_default,
         frontDefault: res.data.sprites.front_default,
       },
+      price: Math.floor(Math.random() * 100),
+      stats: res.data.stats.map((stat:any) => ({
+        baseStat: stat.base_stat,
+        effort: stat.effort,
+        stat: {
+          name: stat.stat.name,
+          url: stat.stat.url,
+        },
+      })),
     };
 
     mutations.processPokemon(pokemon);
