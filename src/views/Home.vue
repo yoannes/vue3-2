@@ -11,6 +11,17 @@
       </div>
     </div>
     <button @click="loadMore">Carregar mais pokemons</button>
+
+    <div>Meus pokemons</div>
+    <div style="display: flex; flex-wrap: wrap">
+      <div v-for="p in myPokemons" :key="p.id">
+        <card
+          :pokemon="p"
+          :images="getImages(p)"
+          :types="p.types"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,6 +42,7 @@ export default defineComponent({
     const state = reactive({});
 
     const pokemons = computed(() => cards.state.pokemons);
+    const myPokemons = computed(() => cards.state.myPokemons);
 
     const getImages = (pokemon: Pokemon) => [
       pokemon.sprites.frontDefault,
@@ -42,12 +54,14 @@ export default defineComponent({
     };
 
     cards.actions.loadPokemons();
+    cards.actions.loadMyPokemons();
 
     return {
       ...toRefs(state),
       pokemons,
       getImages,
       loadMore,
+      myPokemons,
     };
   },
 });

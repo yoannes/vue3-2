@@ -67,6 +67,10 @@ const mutations = {
       state.pokemons.push(pokemon);
     }
   },
+
+  buyPokemon(pokemon: Pokemon) {
+    state.myPokemons.push(pokemon);
+  },
 };
 
 const actions = {
@@ -113,6 +117,29 @@ const actions = {
     };
 
     mutations.processPokemon(pokemon);
+  },
+
+  async loadMyPokemons(): Promise<boolean> {
+    // TODO: Quando implementar API
+
+    const key = 'pokeStore';
+    const pokemons = localStorage.getItem(key);
+    if (pokemons) {
+      state.myPokemons = JSON.parse(pokemons);
+    }
+
+    return true;
+  },
+
+  async buyPokemon(pokemon: Pokemon): Promise<boolean> {
+    // TODO: 1. Fazer chamada API de compra
+
+    mutations.buyPokemon(pokemon);
+
+    const key = 'pokeStore';
+    localStorage.setItem(key, JSON.stringify(state.myPokemons));
+
+    return true;
   },
 };
 
