@@ -5,6 +5,9 @@
       <img v-if="type.type.name === 'grass'" src="@/assets/leaf.svg" />
       <img v-if="type.type.name === 'poison'" src="@/assets/skull.svg" />
       <img v-if="type.type.name === 'fire'" src="@/assets/fire.svg" />
+      <img v-if="type.type.name === 'water'" src="@/assets/water.svg" />
+      <img v-if="type.type.name === 'bug'" src="@/assets/bug.svg" />
+      <img v-if="type.type.name === 'flying'" src="@/assets/flying.svg" />
 
       {{ type.type.name }}
     </div>

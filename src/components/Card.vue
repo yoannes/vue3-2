@@ -12,6 +12,7 @@
       <div>Altura: {{ pokemon.height }}</div>
       <div>Peso: {{ pokemon.weight }}</div>
       <div>Preço: {{ pokemon.price }}</div>
+      <div><button @click="modalBuyOpen = true">Comprar</button></div>
       <div><button @click="modalOpen = true">Stats</button></div>
     </div>
 
@@ -21,9 +22,16 @@
 
     <modal :open="modalOpen" @on-close="modalOpen = false">
       <div v-for="stat in pokemon.stats" :key="stat.name">
-        {{stat.stat.name}} {{stat.baseStat}}
+        {{ stat.stat.name }} {{ stat.baseStat }}
       </div>
     </modal>
+
+    <checkout
+      :open="modalBuyOpen"
+      :pokemon="pokemon"
+      :images="images"
+      @on-close="modalBuyOpen = false"
+    />
   </div>
 </template>
 
@@ -32,9 +40,15 @@ import { computed, defineComponent, ref } from 'vue';
 import Carousel from './Carousel.vue';
 import Modal from './Modal.vue';
 import Types from './Types.vue';
+import Checkout from './Checkout.vue';
 
 export default defineComponent({
-  components: { Types, Carousel, Modal },
+  components: {
+    Types,
+    Carousel,
+    Modal,
+    Checkout,
+  },
   props: {
     pokemon: { type: Object, required: true },
     images: { type: Array, required: true },
@@ -44,17 +58,19 @@ export default defineComponent({
   // Composition API
   setup(props) {
     const modalOpen = ref(false);
+    const modalBuyOpen = ref(false);
     const body = computed(() => `Altura: ${props.pokemon.height}`);
 
     return {
       body,
       modalOpen,
+      modalBuyOpen,
     };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .card {
   border: 1px solid black;
   padding: 5px;
