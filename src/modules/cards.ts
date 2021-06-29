@@ -40,6 +40,7 @@ export interface Pokemon {
 export interface CardState {
   pokemons: Pokemon[];
   myPokemons: Pokemon[];
+  categories: string[];
   busy: boolean;
   nextUrl: string;
 }
@@ -47,6 +48,7 @@ export interface CardState {
 const state: CardState = reactive({
   pokemons: [],
   myPokemons: [],
+  categories: [],
   busy: false,
   nextUrl: 'https://pokeapi.co/api/v2/pokemon?limit=5&offset=0',
 });
@@ -55,6 +57,7 @@ const mutations = {
   setBusy(value: boolean) {
     state.busy = value;
   },
+
   setNextUrl(url: string) {
     state.nextUrl = url;
   },
@@ -66,6 +69,14 @@ const mutations = {
     } else {
       state.pokemons.push(pokemon);
     }
+
+    pokemon.types.forEach((type) => {
+      const category = type.type.name;
+
+      if (!state.categories.includes(category)) {
+        state.categories.push(category);
+      }
+    });
   },
 
   buyPokemon(pokemon: Pokemon) {
