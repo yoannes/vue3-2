@@ -30,9 +30,8 @@ export default defineComponent({
       password: '',
     });
 
-    const login = () => {
-      const res = auth.actions.login(state.username, state.password);
-
+    const login = async () => {
+      const res = await auth.actions.login(state.username, state.password);
       if (res) {
         router.push({ name: 'Home' });
       }

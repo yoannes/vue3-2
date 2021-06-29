@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import {
- computed, defineComponent, reactive, toRefs,
+ computed, defineComponent,
 } from 'vue';
 import Card from '@/components/Card.vue';
 import useCards, { Pokemon } from '@/modules/cards';
@@ -40,7 +40,6 @@ export default defineComponent({
 
   setup() {
     const cards = useCards();
-    const state = reactive({});
 
     const pokemons = computed(() => cards.state.pokemons);
     const myPokemons = computed(() => cards.state.myPokemons);
@@ -58,7 +57,6 @@ export default defineComponent({
     cards.actions.loadMyPokemons();
 
     return {
-      ...toRefs(state),
       pokemons,
       getImages,
       loadMore,

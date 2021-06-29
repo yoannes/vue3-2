@@ -9,8 +9,8 @@
     <div v-if="isLogedIn">
       Ola {{username}}
     </div>
-
   </div>
+
   <router-view />
 </template>
 
